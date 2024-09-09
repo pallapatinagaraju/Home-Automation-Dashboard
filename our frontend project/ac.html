@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Conditioner</title>
+    <style>
+        body {
+            background-color: rgb(144, 193, 253);
+        
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box {
+            padding-top: 20px;
+            width: 800px;
+            height: 690px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 5px 5px 10px gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .box h1 {
+            color: rgb(0, 85, 255);
+            position: absolute;
+            top: 5%;
+            width: fit-content;
+            height: fit-content;
+            text-align: center;
+            margin: 0;
+            font-style: italic;
+            font-size: xx-large;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ac-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .ac-body {
+            
+            background-image: url("/images/ac3.jpg");
+            background-size:cover;
+            border-radius: 20px;
+            
+            width: 500px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            position: relative;
+        }
+
+        .ac-screen {
+            background: linear-gradient(145deg, #3a3a3a, #262626);
+            width: 20%;
+            height: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f0;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            position: relative;
+            visibility: hidden; /* Hide by default */
+        }
+
+        .ac-temperature {
+            color: #0f0;
+        }
+
+        .ac-swing {
+            width: 450px;
+            height: 38px;
+            background-color: #ccc;
+            border-radius: 5px;
+            animation: swingOn 50000s ;
+            animation: swingOff 50000s ;
+            position: relative;
+            bottom: -10px;
+        }
+
+        .air-blow {
+            position: absolute;
+            top: 185px;
+            width: 80%;
+            height: 100px;
+            background: linear-gradient(180deg, rgba(0, 255, 255, 0.3), rgba(0, 255, 255, 0));
+            visibility: hidden; /* Hide by default */
+        }
+
+        @keyframes swingOn {
+            0% {
+                transform: translateY(0);
+            }
+
+            25% {
+                transform: translateY(30px);
+            }
+
+            50% {
+                transform: translateY(30px);
+            }
+
+            75% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes swingOff {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes airBlowOn {
+            0% {
+                height: 0;
+            }
+
+            50% {
+                height: 30%;
+            }
+
+            100% {
+                height: 53%;
+            }
+        }
+
+        @keyframes airBlowOff {
+            0% {
+                height: 0;
+            }
+
+            100% {
+                height: 0;
+            }
+        }
+
+        .ac-controls {
+            display: flex;
+            justify-content: space-between;
+            width: 400px;
+            margin-top: 10px;
+        }
+
+        .ac-button {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 10px;
+            margin-top: 150px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 60px;
+            text-align: center;
+        }
+
+        .ac-button:hover {
+            background-color: #0056b3;
+        }
+
+        #power-button.on {
+            background-color: #28a745;
+        }
+
+        #power-button.off {
+            background-color: #dc3545;
+        }
+
+
+
+
+
+        #power-button.off {
+            background-color: #dc3545;
+        }
+
+
+        #power-button.off {
+            background-color: #dc3545;
+        }
+
+
+        #power-button.off {
+            background-color: #dc3545;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>AIR CONDITIONER</h1>
+        <div class="ac-container">
+            <div class="ac-body">
+                <div class="ac-screen" id="ac-screen">
+                    <div class="ac-temperature" id="temperature-display">24°C</div>
+                </div>
+                <div class="air-blow" id="air-blow"></div>
+                <div class="ac-swing" id="ac-swing"></div>
+            </div>
+            <div class="ac-controls">
+                <button class="ac-button" id="power-button">On</button>
+                <button class="ac-button" id="temp-up">▲</button>
+                <button class="ac-button" id="temp-down">▼</button>
+                <button class="ac-button" id="swing-button" style="width: 100px;">Swing</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const powerButton = document.getElementById('power-button');
+            const tempUpButton = document.getElementById('temp-up');
+            const tempDownButton = document.getElementById('temp-down');
+            const swingButton = document.getElementById('swing-button');
+            const temperatureDisplay = document.getElementById('temperature-display');
+            const acScreen = document.getElementById('ac-screen');
+            const acSwing = document.getElementById('ac-swing');
+            const airBlow = document.getElementById('air-blow');
+
+            let powerOn = false;
+            let currentTemp = 24;
+            let swingOn = false;
+
+            powerButton.addEventListener('click', () => {
+                powerOn = !powerOn;
+                powerButton.classList.toggle('on', powerOn);
+                powerButton.classList.toggle('off', !powerOn);
+                powerButton.textContent = powerOn ? 'Off' : 'On';
+                acScreen.style.visibility = powerOn ? 'visible' : 'hidden';
+                airBlow.style.visibility = powerOn ? 'visible' : 'hidden';
+
+                if (!powerOn) {
+                    swingOn = false;
+                    acSwing.style.animation = 'swingOff 0.5s ease-in-out';
+                    airBlow.style.animation = 'airBlowOff 0.5s ease-in-out';
+                    swingButton.textContent = 'Swing';
+                } else {
+                    airBlow.style.animation = 'airBlowOn 1s ease-in-out infinite';
+                }
+            });
+
+            tempUpButton.addEventListener('click', () => {
+                if (powerOn) {
+                    currentTemp++;
+                    updateTemperatureDisplay();
+                }
+            });
+
+            tempDownButton.addEventListener('click', () => {
+                if (powerOn) {
+                    currentTemp--;
+                    updateTemperatureDisplay();
+                }
+            });
+
+            swingButton.addEventListener('click', () => {
+                if (powerOn) {
+                    swingOn = !swingOn;
+                    swingButton.textContent = swingOn ? 'Swing Off' : 'Swing';
+                    acSwing.style.animation = swingOn ? 'swingOn 1s ease-in-out infinite alternate' : 'swingOff 0.5s ease-in-out';
+                    airBlow.style.animation = swingOn ? 'airBlowOn 1s ease-in-out infinite' : 'airBlowOff 0.5s ease-in-out';
+                }
+            });
+
+            function updateTemperatureDisplay() {
+                temperatureDisplay.textContent = `${currentTemp}°C`;
+            }
+        });
+    </script>
+</body>
+
+</html>

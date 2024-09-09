@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fridge</title>
+    <style>
+        body {
+            background-color: rgb(144, 193, 253);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fridge-container {
+            text-align: center;
+
+        }
+
+        .fridge {
+            width: 270px;
+            height: 460px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background-image: url('/images/fridgeinside.jpg ');
+            background-size: cover;
+            border-radius: 5px;
+
+
+
+
+        }
+
+        .door {
+            width: 100%;
+            height: 50%;
+            border: 1px solid #999;
+            position: relative;
+            transition: transform 0.5s ease-in-out;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            cursor: pointer;
+        }
+
+        .top-door {
+            border-bottom: none;
+            transform-origin: left;
+            background-image: url('/images/fridge3.jpg');
+            
+            background-size: cover;
+        }
+
+        .bottom-door {
+            border-top: none;
+            transform-origin: left;
+            justify-content: space-between;
+            background-image: url('/images/fridge3.jpg');
+          
+            background-size: cover;
+        }
+
+        .light {
+            width: 8px;
+            height: 8px;
+            border-radius: 10%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+    
+
+
+        .closed-light {
+            background-color:rgb(9, 227, 9);
+        }
+
+        .open-light {
+            background-color: rgb(240, 35, 35);
+        }
+
+        .screen-box {
+            position: absolute;
+            width: 150px;
+            height: 80px;
+            top: 20px;
+            right: 50px;
+            background-color: #000000;
+            color: #fff;
+            padding: 10px;
+            border-radius: 1px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            align-content: center;
+        }
+
+        #date {
+
+            color: rgb(0, 255, 0);
+        }
+
+        #time {
+
+            color: rgb(247, 0, 255);
+        }
+
+        #temperature {
+
+            color:gold;
+        }
+
+        #weather {
+
+            color: rgb(255, 140, 0);
+        }
+
+
+        #humidity {
+
+            color: rgb(0, 255, 247);
+        }
+
+        .transparent-space {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 1px;
+            top: 40px;
+            left: 10px;
+            width: 35%;
+            height: 60%;
+
+        }
+
+        .handle {
+            width: 15px;
+            height: 30px;
+            background-color: black;
+            border-radius: 5px;
+            margin-left: 250px;
+            margin-top: 5px;
+
+        }
+
+        .freezer-control {
+            background-color: #000000;
+            color:rgb(0, 255, 247);
+            border-radius: 1px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            margin: 10px;
+            position: absolute;
+            left: 110px;
+            bottom: 120px;
+            width: 100px;
+            height: 60px;
+            align-items: center;
+        }
+
+        .box {
+            padding-top: 20px;
+            width: 800px;
+            height: 690px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 5px 5px 10px gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .box h1 {
+            color: rgb(0, 85, 255);
+            position: absolute;
+            top: 5%;
+            width: fit-content;
+            height: fit-content;
+            text-align: center;
+            margin: 0;
+            font-style: italic;
+            font-size: xx-large;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>FRIDGE</h1>
+        
+        <div class="fridge-container">
+            <div class="fridge">
+                <div class="door top-door" id="top-door" onclick="toggleDoor('top')">
+                    <div class="handle"></div>
+                    <div class="light closed-light" id="top-light"></div>
+                    <div class="screen-box">
+                        <div id="date">Date: 00/00/0000</div>
+                        <div id="time">Time: 00:00</div>
+                        <div id="temperature">Temp: 4°C</div>
+                        <div id="weather">Weather: Sunny</div>
+                        <div id="humidity">Humidity: 50%</div>
+                        <div class="transparent-space" style="width: 180px; height: 30px; top: 120px; left: -5px;">
+                        </div>
+                    </div>
+                </div>
+                <hr size="1" width="100%">
+                <div class="door bottom-door" id="bottom-door" onclick="toggleDoor('bottom')">
+                    <div class="handle"></div>
+                    <div class="light closed-light" id="bottom-light"></div>
+                    <div class="transparent-space"></div>
+                    <div class="freezer-control">
+                        <label for="freezer-temp">Freezer Temp:</label>
+                        <input type="number" id="freezer-temp" name="freezer-temp" min="-20" max="0" value="-10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleDoor(door) {
+            const doorElement = document.getElementById(`${door}-door`);
+            const lightElement = document.getElementById(`${door}-light`);
+            if (doorElement.classList.contains('open')) {
+                doorElement.classList.remove('open');
+                doorElement.style.transform = 'rotateY(0deg)';
+                lightElement.classList.remove('open-light');
+                lightElement.classList.add('closed-light');
+            } else {
+                doorElement.classList.add('open');
+                doorElement.style.transform = 'rotateY(-130deg)';
+                lightElement.classList.remove('closed-light');
+                lightElement.classList.add('open-light');
+            }
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('time').innerText = `Time: ${hours}:${minutes}`;
+            document.getElementById('date').innerText = `Date: ${now.toLocaleDateString()}`;
+        }
+
+        function updateTemperature() {
+            const temperature = Math.floor(Math.random() * 10) + 1; // Simulated temperature between 1°C and 10°C
+            document.getElementById('temperature').innerText = `Temp: ${temperature}°C`;
+        }
+
+        function updateWeather() {
+            const weatherConditions = ["Sunny", "Cloudy", "Rainy", "Snowy"];
+            const randomWeather = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+            document.getElementById('weather').innerText = `Weather: ${randomWeather}`;
+        }
+
+        function updateHumidity() {
+            const humidity = Math.floor(Math.random() * 100) + 1; // Simulated humidity between 1% and 100%
+            document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
+        }
+
+        setInterval(updateTime, 1000);
+        setInterval(updateTemperature, 1000);
+        setInterval(updateWeather, 10000); // Update weather every 10 seconds
+        setInterval(updateHumidity, 1000); // Update humidity every second
+
+        updateTime();
+        updateTemperature();
+        updateWeather();
+        updateHumidity();
+    </script>
+</body>
+
+</html>

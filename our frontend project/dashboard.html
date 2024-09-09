@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="refresh" content="300">
+    <meta name="author" content="Coders">
+    <meta name="description" content="About Home Automation">
+    <meta name="keywords" content="Home Automation">
+    <meta name="revised" content="Coders, 26/06/2024">
+    <title> Home Automation Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link rel="icon" href="images/logo.svg" type="image/icon type">
+
+    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+
+</head>
+
+<body onload="startTime()">
+
+
+    <div class="header">
+        <h1>HOME  AUTOMATION  DASHBOARD</h1>
+    </div>
+
+    <!-- Dashboard started from here-->
+
+
+    <div class="dashboard">
+        <div class="mainrow">
+
+
+            <!-- 1st box in dashboard  started from here-->
+
+            <div class="box1">
+                <h2>TODAY</h2>
+                <div class="datetime">
+                    <p style="margin-right:30px ;" id="date"></p>
+                    <p id="time"></p>
+                </div>
+                <span class="tempsymbol"><i class="fas fa-clouds cloud"></i><span class="cloudy">Cloudy</span></span>
+                <div class="temp">
+                    <div class="Temperature">
+                        <strong>24</strong><sup>°C</sup>
+                        <p>Temperature</p>
+                    </div>
+
+                    <div class="Humidity">
+                        <strong>64%</strong>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 2nd box in dashboard started from here-->
+
+
+            <div class="box2">
+
+                <h2>WATER TANK LEVEL</h2>
+                <div class="gauge">
+                    <div class="gauge_body">
+                        <div class="gauge_fill"></div>
+                        <div class="gauge_cover"></div>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <p class="low">Low</p>
+                    <p class="full">Full</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="devices">
+
+            <!--light  functioning started here-->
+
+            <div class="row1" style="display:inline-flex;">
+
+
+
+
+                <div class="box">
+                    <div class="box1" style="width: 150px; height:30px;  justify-content: center; background-color: whitesmoke;"> <p>LIGHT</p></div>
+                    <br>
+                    <br>
+                    <a href="bulb.html"><input type="button" value="CLICK HERE" style="width: 100px;  height: 50px;"></a>
+                </div>
+
+                <div class="box">
+                    <div class="box1" style="width: 150px; height:30px;  justify-content: center; background-color: whitesmoke;"> <p>TELEVISION</p></div>
+                    <br>                  
+                    <br>
+                    <a href="tv.html"><input type="button" value="CLICK HERE" style="width: 100px;  height: 50px;" ></a>
+                </div>
+
+                <div class="box">
+                    <div class="box1" style="width: 150px; height:30px;  justify-content: center; background-color: whitesmoke;"><p>SPEAKER</p></div>
+                    <br>
+                    <br>
+                    <a href="speaker.html"><input type="button" value="CLICK HERE" style="width: 100px;  height: 50px;" ></a>
+                </div>
+
+                <div class="box">
+                    <div class="box1" style="width: 150px; height:30px;  justify-content: center; background-color: whitesmoke; "><p>CCTV </p></div>
+                    <br>
+                    <br>
+                    <a href="cctv.html"><input type="button" value="CLICK HERE"  style="width: 100px;  height: 50px;"></a>
+                </div>
+
+
+            </div>
+            <br>
+            <br>
+
+            <!--fan functioning started here-->
+
+
+            <div class="row2" style="display: inline-flex;">
+
+                <div class="box">
+                    <div class="box1" style="width: 150px; height:30px;  justify-content: center; background-color: whitesmoke;"><p>FAN</p></div>
+                    <br>
+                    <br>
+                    <a href="fan.html"><input type="button" value="CLICK HERE"  style="width: 100px;  height: 50px; "></a>
+                </div>
+
+                <div class="box">
+                    <div class="box1" style="width: 150px; height:30px;  justify-content: center; background-color: whitesmoke;"><p>FRIDGE</p></div>
+                    <br>
+                    <br>
+                    <a href="fridge.html"><input type="button" value="CLICK HERE" style="width: 100px;  height: 50px;" ></a>
+                </div>
+
+                <div class="box">
+                    <div class="box1" style="width: 150px; height:30px;  justify-content: center; background-color: whitesmoke;"><p>AC</p></div>
+                    <br>
+                    <br>
+                    <a href="ac.html"><input type="button" value="CLICK HERE"  style="width: 100px;  height: 50px;"></a>
+                </div>
+
+
+                <div class="box">
+                    <div class="box1" style="width: 150px; height:30px;  justify-content: center; background-color: whitesmoke;"> <p>DOORLOCK</p></div>
+                    <br>
+                    <br>
+                    <a href="doorlock.html"><input type="button" value="CLICK HERE"  style="width: 100px;  height: 50px;"></a>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script src="dashboard.js"></script>
+
+
+
+</body>
+
+</html>

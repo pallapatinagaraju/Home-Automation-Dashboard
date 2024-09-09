@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speaker Box </title>
+
+  <!-- CSS STARTS HERE-->
+
+  <style>
+    body {
+
+      background-color: rgb(144, 193, 253);
+
+      /*background-color: rgba(0, 0, 0, 0.61);*/
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+
+
+
+    .a.animated {
+      animation: pulsate 0.5s infinite;
+    }
+
+    @keyframes pulsate {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .box {
+      padding-top: 20px;
+      width: 800px;
+      height: 690px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 5px 5px 10px gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+    }
+
+    .box h1 {
+
+      color: rgb(0, 85, 255);
+      position: absolute;
+      top: 5%;
+      width: fit-content;
+      height: fit-content;
+      text-align: center;
+      margin: 0;
+      font-style: italic;
+      font-size: xx-large;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .switch {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+
+
+<body>
+
+  <div class="box">
+    <h1>SPEAKER</h1>
+    <br>
+
+    <img class="a" src="images/speakerimg.jpg" alt=" speaker" id="speakerBox" style="width: 600px;  height: 440px;">
+    <br><br><br>
+    <label class="switch">
+      <input type="checkbox" id="toggleButton">
+      <span class="slider round"></span>
+    </label>
+
+
+  </div>
+  <audio id="audioPlayer" src="John-Cena-Theme.mp3"></audio>
+
+  <!-- JAVASCRIPT  STARTS HERE-->
+
+
+  <script>
+
+
+
+
+
+
+
+    const audioPlayer = document.getElementById('audioPlayer');
+    const toggleButton = document.getElementById('toggleButton');
+    const speakerImg = document.getElementById('speakerBox');
+
+    toggleButton.addEventListener('click', function () {
+      if (audioPlayer.paused) {
+        audioPlayer.currentTime = 0;
+        audioPlayer.play();
+        toggleButton.textContent = 'Pause Music';
+
+      } else {
+        
+        audioPlayer.currentTime = 0;
+        audioPlayer.pause();
+        toggleButton.textContent = 'Play Music';
+
+      }
+    });
+
+
+
+    toggleButton.addEventListener('click', () => {
+      if (speakerBox.classList.contains('animated')) {
+        speakerBox.classList.remove('animated');
+        toggleButton.textContent = 'Turn On';
+      } else {
+        speakerBox.classList.add('animated');
+        toggleButton.textContent = 'Turn Off';
+      }
+    });
+
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

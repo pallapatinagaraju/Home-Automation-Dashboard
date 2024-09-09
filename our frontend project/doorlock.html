@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door lock</title>
+    <style>
+        body {
+            background-color: rgb(144, 193, 253);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #door-container {
+            width: 240px;
+            height: 430px;
+            border: 2px solid #cecaca;
+            position: relative;
+            background-image: url('/images/doorlockimg.jpg');
+            background-size: cover;
+            perspective: 1000px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #door {
+            width: 100%;
+            height: 100%;
+        
+            background-image: url("c:\Users\nagar\Downloads\download.jpeg");
+            background-size: cover;
+            position: absolute;
+            transform-origin: left center;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 1s cubic-bezier(0.5, 0.1, 0.1, 1);
+        }
+
+        #handle {
+            width: 18px;
+            height: 55px;
+            background-color: rgb(176, 172, 172);
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            
+            border-radius: 0px;
+            transition: transform 1s;
+        }
+
+        #light {
+            width: 8px;
+            height: 8px;
+            background-color: rgb(255, 11, 11);
+            position:fixed;
+            top: 235px;
+            left: 216.5px;
+            border-radius: 100%;
+            transition: background-color 0.5s;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 55px;
+            background-color: gold;
+            color: black;
+        }
+
+        .box {
+            padding-top: 20px;
+            width: 800px;
+            height: 690px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 5px 5px 10px gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .box h1 {
+            color: rgb(0, 85, 255);
+            position: absolute;
+            top: 5%;
+            width: fit-content;
+            height: fit-content;
+            text-align: center;
+            margin: 0;
+            font-style: italic;
+            font-size: xx-large;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>DOOR LOCK</h1>
+        <div id="door-container">
+            
+            <div id="door">
+                <div id="handle"></div>
+                <div id="light"></div>
+            </div>
+        </div>
+        <button id="toggle-btn">Open Door</button>
+    </div>
+
+    <audio id="open-sound" src="/images/mixkit-modern-classic-door-bell-sound-113.wav"></audio>
+    <audio id="close-sound" src="#"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const door = document.getElementById('door');
+            const handle = document.getElementById('handle');
+            const light = document.getElementById('light');
+            const toggleBtn = document.getElementById('toggle-btn');
+            const openSound = document.getElementById('open-sound');
+            const closeSound = document.getElementById('close-sound');
+            let isOpen = false;
+
+            toggleBtn.addEventListener('click', function() {
+                if (isOpen) {
+                    closeDoor();
+                } else {
+                    openDoor();
+                }
+            });
+
+            function openDoor() {
+                door.style.transform = 'rotateY(-90deg)'; // Open door animation
+                handle.style.transform = 'rotate(-90deg)'; // Rotate handle to open position
+                light.style.backgroundColor = 'green'; // Change light to green
+                openSound.play(); // Play open door sound
+                isOpen = true;
+                toggleBtn.textContent = 'Close Door';
+            }
+
+            function closeDoor() {
+                door.style.transform = 'rotateY(0deg)'; // Close door animation
+                handle.style.transform = 'rotate(0deg)'; // Rotate handle to close position
+                light.style.backgroundColor = 'red'; // Change light to red
+                closeSound.play(); // Play close door sound
+                isOpen = false;
+                toggleBtn.textContent = 'Open Door';
+            }
+        });
+    </script>
+</body>
+</html>
